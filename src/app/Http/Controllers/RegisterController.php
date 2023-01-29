@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use App\Common\Common;
 
 
@@ -11,7 +11,6 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
-        logger('aaaaaaaa');
         // バリデーション
         $validatedData = $request->validate([
             'name' => 'required|max:255',

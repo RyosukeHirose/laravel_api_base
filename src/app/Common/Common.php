@@ -35,6 +35,10 @@ class Common
                 $responseStatusCode = 422;
                 $message = 'タイムアウトエラー';
                 break;
+            case -6:
+                $responseStatusCode = 401;
+                $message = '認証エラー';
+                break;
             case -10:
                 $responseStatusCode = 422;
                 $message = '原因不明エラー';

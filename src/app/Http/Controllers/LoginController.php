@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Common\Common;
+
 
 class LoginController extends Controller
 {
@@ -21,10 +23,9 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            return response()->json(Auth::user());
+            return Common::jsonOut(0, Auth::user());
         }
-        return response()->json([], 401);
+        return Common::jsonOut(-6, []);
     }
 
     /**
@@ -39,6 +40,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return response()->json(true);
+        return Common::jsonOut(0, []);
     }
 }
