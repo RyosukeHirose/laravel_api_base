@@ -32,6 +32,24 @@ class LoginController extends Controller
      * @param  Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
+    public function shopLogin(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::guard('shops')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return Common::jsonOut(0, Auth::guard('shops')->user());
+        }
+        return Common::jsonOut(-6, []);
+    }
+
+    /**
+     * @param  Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request)
     {
         Auth::logout();

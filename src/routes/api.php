@@ -22,6 +22,17 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout']);
 Route::post('register', [RegisterController::class, 'register']);
 
+Route::prefix('shop')->group(function () {
+    Route::post('login', [LoginController::class, 'shopLogin'])->name('shop.login');
+    Route::post('logout', [LoginController::class, 'logout'])->name('shop.logout');
+    Route::post('register', [RegisterController::class, 'shopRegister']);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+
+Route::middleware('auth:sanctum')->middleware('auth:shops')->get('/shop', function (Request $request) {
     return $request->user();
 });
